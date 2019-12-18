@@ -124,3 +124,46 @@ function agregaAlumnos(arr_alumnos, ...alumnos) {
 
 alumnos2 = agregaAlumnos(alumnos, "HANNA", "MIMI", "ANORI");
 console.log(alumnos2);
+
+//OPERADOR SPREAD
+//MANDA UN ARREGLO COMO CADA UNIDAD SEPARADA INDEPENDIENTE
+let numeros = [1, 4, 76, 123, 74, 13, 74, 23, 2123];
+//var max = Math.max.apply(Math, numeros);
+let max = Math.max(...numeros);
+console.log(max);
+
+//USANDO SPREAD PARA EXTRAER SOLO LAS PROPIEDADES Y NO HACER UNA REFERENCIA A LA DIRECCION DE MEMORIA
+let persona2 = { ...PERSONA };
+persona2.rank = "platino";
+console.log(PERSONA);
+console.log(persona2);
+
+//USO DE SPREAD
+//PARA AGREGAR PROPIEDADES DE OTRO OBJETO, PERO MANTENER EL VALOR DE LAS ORIGINALES COMPARTIDAS
+let persona3 = { nombre: "HANNACAT", rank: "diamante", rp: "1999", ea: "18000" };
+persona2 = { ...persona3, ...persona2 };
+console.log(persona3);
+console.log(persona2);
+
+//USO DE REST
+function usodeREST(saludo, ...nombres) {
+    for (i in nombres) {
+        console.log(`${saludo} ${nombres[i]}`);
+    }
+}
+usodeREST("HOLA", "HANNITA", "MIMI", "MASITA");
+
+//LLAMAR FUNCIONES CON NEW Y SIN
+//PARA CREAR OBJETOS ES NECESARIO UTILIZAR NEW PARA LLAMAR FUNCIONES CON ESE PROPOSITO
+//SE UTILIZA NEW.TARGET EN LUGAR DE INSTANCEOF PARA QUE AUN SI UTILIZAN .CALL SI NO FUE INSTANCIADO CON NEW
+//SE INDIQUE EL ERROR
+function usoNTgt(nombre) {
+    if(typeof new.target != "undefined"){
+        this.nombre = nombre;
+    }else{
+        throw new Error("Debe ser utilizada con el new");
+    }
+    
+}
+let siEs = new usoNTgt("ABEJA MAYA");
+let noEs = new usoNTgt.call(siEs,"SCOOBYDOO");

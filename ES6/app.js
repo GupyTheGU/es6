@@ -1,5 +1,5 @@
-//----------------------------------------------------------SECCION 1---------------------------------------------------
-console.log("---------SECCION 1-------");
+//----------------------------------------------------------SECCION 2---------------------------------------------------
+console.log("---------SECCION 2-------");
 var funciones = [];
 //OBJETO COMO CONSTANTE
 const PERSONA = {
@@ -22,8 +22,8 @@ funciones.forEach(
     }
 );
 console.log(PERSONA);
-//----------------------------------------------------------SECCION 2-------------------------------------------------------
-console.log("---------SECCION 2-------");
+//----------------------------------------------------------SECCION 3-------------------------------------------------------
+console.log("---------SECCION 3-------");
 var saludo = "masita come kk";
 //con js5
 console.log(saludo.substr(0, 1) === "m");
@@ -83,8 +83,8 @@ let mensaje = `\hola \\mundo//\\s`;
 let mensaje2 = String.raw`\hola \\mundo//\\s`;
 console.log(mensaje);
 console.log(mensaje2);
-//----------------------------------------------------------SECCION 3-------------------------------------------------------
-console.log("---------SECCION 3-------");
+//----------------------------------------------------------SECCION 4-------------------------------------------------------
+console.log("---------SECCION 4-------");
 //SE INICIALIZA EN LOS ARGUMENTOS SI SON VALORES OPCIONALES
 //LOS OPCIONALES VAN DESPUES DE LOS PERMANENTES
 function opcional(mensaje = "Holis", tiempo = 2000) {
@@ -158,12 +158,53 @@ usodeREST("HOLA", "HANNITA", "MIMI", "MASITA");
 //SE UTILIZA NEW.TARGET EN LUGAR DE INSTANCEOF PARA QUE AUN SI UTILIZAN .CALL SI NO FUE INSTANCIADO CON NEW
 //SE INDIQUE EL ERROR
 function usoNTgt(nombre) {
-    if(typeof new.target != "undefined"){
+    if (typeof new.target != "undefined") {
         this.nombre = nombre;
-    }else{
+    } else {
         throw new Error("Debe ser utilizada con el new");
     }
-    
+
 }
 let siEs = new usoNTgt("ABEJA MAYA");
-let noEs = new usoNTgt.call(siEs,"SCOOBYDOO");
+//let noEs = usoNTgt.call(siEs,"SCOOBYDOO");
+//----------------------------------------------------------SECCION 5-------------------------------------------------------
+console.log("---------SECCION 5-------");
+//FUNCIONES FLECHA
+var mifuncion1 = function (num1, num2) {
+    return num1 + num2;
+}
+let mifuncion2 = (num1, num2) => num1 + num2;
+console.log(mifuncion1());
+console.log(mifuncion2());
+//FUNCIONAN DIFERENTE PERO SIRVEN PARA LO MISMO
+let saludarPersona = (nombre) => {
+    let persona = `HOLA ${nombre}`;
+    return persona;
+}
+console.log(saludarPersona("MAZATZIN"));
+//PARA REGRESAR UN TIPO OBJETO
+let regresaObj = id => ({ id: id, nombre: "GupyTheGU" });
+console.log(regresaObj(2));
+
+//FUNCIONES ANONIMAS
+//SON EJECUTADAS AL MOMENTO DE SER CREADAS
+let funcionANM = (nombre => `Saludos ${nombre}`)("Hanna Golden");
+console.log(funcionANM); //NO SE PONEN LOS PARENTESIS AL LLAMARSE
+
+//CAMBIANDO EL SCOPE DE THIS
+var manejador = {
+    id: "123",
+    init: function () {
+        //ES5
+        // document.addEventListener("click", (function (event) {
+        //     this.escuchaClick(event.type);
+        // }).bind(this), false);
+
+        //ES6
+        document.addEventListener("click", event => this.escuchaClick(event.type), false);
+    },
+    escuchaClick: function (type) {
+        console.log("Manejando " + type + " para el id " + this.id);
+    }
+};
+manejador.init();
